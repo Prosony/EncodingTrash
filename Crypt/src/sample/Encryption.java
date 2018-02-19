@@ -82,8 +82,7 @@ public class Encryption {
 		//		System.out.println("number by ABC:" + number);
 
 		QuickSort sort = new QuickSort();
-		sort.sorting(array, 0, width);
-
+		sort.sortDuoMassive(array, height, width);
 
 		return null;
 	}

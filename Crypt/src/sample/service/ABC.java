@@ -13,7 +13,7 @@ public class ABC {
 			switch (abcKind){
 				case "rus":
 					for (int index = 0; index < abcRUS.length; index++){
-						System.out.println(symbol+" "+abcRUS[index]);
+//						System.out.println(symbol+" "+abcRUS[index]);
 						if (symbol == abcRUS[index]){
 							indexEquals = index;
 							break;
