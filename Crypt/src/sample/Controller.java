@@ -25,17 +25,17 @@ public class Controller {
 		String typeCrypto = crypto.getValue();
 		String sourceText = source.getText();
 		System.out.println("source: "+sourceText);
-		AlgoCrypt algoCrypt = new AlgoCrypt();
+		Encryption encryption = new Encryption();
 
 		switch (typeCrypto) {
 			case "1":
 				int keyInt = Integer.parseInt(this.key.getText()); //TODO add error if key > 50% of count symbol by source text
-				String resultText = algoCrypt.firstAlgo(keyInt, sourceText);
+				String resultText = encryption.firstEncryption(keyInt, sourceText);
 				result.setText(resultText);
 				break;
 			case "2":
 				String keyString = this.key.getText();
-				algoCrypt.secondAlgo(keyString, sourceText);
+				encryption.secondEncryption(keyString, sourceText);
 				break;
 			case "3":
 				break;

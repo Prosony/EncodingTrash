@@ -20,7 +20,7 @@ public class ABC {
 						}
 					}
 					if (indexEquals != -1){
-						return abcENG[indexEquals];
+						return indexEquals;
 					}
 					break;
 				case "eng":
@@ -31,7 +31,7 @@ public class ABC {
 						}
 					}
 					if (indexEquals != -1){
-						return abcENG[indexEquals];
+						return indexEquals;
 					}
 					break;
 

@@ -1,10 +1,11 @@
 package sample;
 
 import sample.service.ABC;
+import sample.service.QuickSort;
 
-public class AlgoCrypt {
+public class Encryption {
 
-	public String firstAlgo(int key, String source){
+	public String firstEncryption(int key, String source){
 		int count;
 		if (source.length() % key > 0){
 			count = source.length() / key + 1;
@@ -22,9 +23,7 @@ public class AlgoCrypt {
 
 		System.out.println("#____PARSING_START____#");
 		for (int i_key=0; i_key < key; i_key++){
-
 			for (int i_count=0; i_count < count; i_count++){
-
 
 				if (index_of_char < source.length()){
 					array[i_key][i_count] = sourceArray[index_of_char];
@@ -33,23 +32,62 @@ public class AlgoCrypt {
 					System.out.println("#ZERO#ZERO#");
 					array[i_key][i_count] = ' ';
 				}
-
 				System.out.print(array[i_key][i_count]);
-			}
 
+			}
 		}
 		System.out.println("\n#____PARSING_END____#");
 		return convertArray(array, key, count);
 	}
 
-	public String secondAlgo(String key, String source){
-		char[] keyArray = key.toCharArray();
+	public String secondEncryption(String key, String source){
+
 		ABC abc = new ABC();
-		int number = abc.getNumberABC(key.toCharArray()[0]);
-		System.out.println("number by ABC:" + number);
+
+		char[] keyArray = key.toCharArray();
+		int width = keyArray.length;
+
+		int height;
+		if((source.length()+width)%width > 0){
+			height = (source.length()+width)/width + 1;
+		}else{
+			height = (source.length()+width)/width;
+		}
+		char[][] array = new char[height][width];
+		char[] sourceArray = source.toCharArray();
+		int sourceWidth = sourceArray.length;
+
+		for (int index = 0; index < width; index++){
+			array[0][index] = keyArray[index];
+		}
+		int indexSource = 0;
+		for (int indexHeight = 1; indexHeight < height; indexHeight++){
+			for (int indexWidth = 0; indexWidth < width; indexWidth++){
+				if(indexSource < sourceWidth){
+					array[indexHeight][indexWidth] = sourceArray[indexSource];
+					indexSource++;
+				}else{
+					array[indexHeight][indexWidth] = ' ';
+				}
+			}
+		}
+//		System.out.println();
+//		for (int indexHeight = 0; indexHeight < height; indexHeight++){
+//			for (int indexWidth = 0; indexWidth < width; indexWidth++) {
+//				System.out.print(array[indexHeight][indexWidth]);
+//			}
+//		}
+
+		//		int number = abc.getNumberABC(key.toCharArray()[0]);
+		//		System.out.println("number by ABC:" + number);
+
+		QuickSort sort = new QuickSort();
+		sort.sorting(array, 0, width);
+
 
 		return null;
 	}
+
 	private String convertArray(char[][] result , int key, int count){
 
 		StringBuilder builder = new StringBuilder();
