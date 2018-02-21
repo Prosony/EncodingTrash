@@ -83,7 +83,6 @@ public class Encryption {
 
 		QuickSort sort = new QuickSort();
 		sort.sortDuoMassive(array, height, width);
-
 		return null;
 	}
 
