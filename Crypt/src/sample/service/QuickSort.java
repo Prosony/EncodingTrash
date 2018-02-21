@@ -2,7 +2,7 @@ package sample.service;
 
 public class QuickSort {
 	private ABC abc = new ABC();
-	private int number = 0;
+
 	public void sortDuoMassive(char[][] source, int height , int width){
 		char[] key = new char[width];
 
@@ -17,46 +17,28 @@ public class QuickSort {
 	}
 
 	private char[] sorting(char[] source, int left, int right){
-
-		int index = partition(source, left, right);
-
-		if (left < index - 1){
-			System.out.println("#"+number+" left: "+left+" index "+index);
-			number++;
+		if (left < right){
+			int index = partition(source, left, right);
 			sorting(source, left, index - 1);
+			sorting(source, index +1, right);
 		}
-		if (index < right - 1) {
-			System.out.println("#"+number+" index "+index+" right: "+right);
-			number++;
-			sorting(source, index, right);
-		}
-
 		return source;
 	}
 
 	private int partition(char[] source, int leftPart, int rightPart) {
-		int left = leftPart;
-		int right = rightPart;
-		int support = (left + right)/2;
-		int supportNumberChar = abc.getNumberABC(source[support]); //support element
-		while(left < right){
-			while(abc.getNumberABC(source[left]) < supportNumberChar){
-				left++;
-			}
-			while(abc.getNumberABC(source[right]) > supportNumberChar){
-				right--;
-			}
-			System.out.println("supportNumberChar: "+ supportNumberChar);
-			System.out.println("[left]"+left+" < "+right+"[right]");
-			if (left < right){
-				char afk = source[left];
-				source[left] = source[right];
-				source[right] = afk;
-				left++;
-				right--;
+		int supportNumberChar = abc.getNumberABC(source[rightPart]); //support element
+		int indexLow = (leftPart - 1);
+		for (int index = leftPart; index < rightPart; index++){
+			if (abc.getNumberABC(source[index]) <= supportNumberChar){
+				indexLow++;
+				char temp = source[indexLow];
+				source[indexLow] = source[index];
+				source[index] = temp;
 			}
 		}
-		System.out.println("Part 3");
-		return left;
+		char temp = source[indexLow+1];
+		source[indexLow+1] = source[rightPart];
+		source[rightPart] = temp;
+		return indexLow+1;
 	}
 }
