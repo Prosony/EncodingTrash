@@ -41,7 +41,7 @@ public class ABC {
 		}
 		return -1;
 	}
-	private String checkABC(char symbol){
+	public String checkABC(char symbol){
 		for (char anAbcENG : abcENG) {
 			if (symbol == anAbcENG) {
 				return "eng";

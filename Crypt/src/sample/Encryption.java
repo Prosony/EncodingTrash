@@ -37,7 +37,7 @@ public class Encryption {
 			}
 		}
 		System.out.println("\n#____PARSING_END____#");
-		return convertArray(array, key, count);
+		return convertArray(array, key, count, 1);
 	}
 
 	public String secondEncryption(String key, String source){
@@ -71,32 +71,66 @@ public class Encryption {
 				}
 			}
 		}
-//		System.out.println();
-//		for (int indexHeight = 0; indexHeight < height; indexHeight++){
-//			for (int indexWidth = 0; indexWidth < width; indexWidth++) {
-//				System.out.print(array[indexHeight][indexWidth]);
-//			}
-//		}
 
-		//		int number = abc.getNumberABC(key.toCharArray()[0]);
-		//		System.out.println("number by ABC:" + number);
+		System.out.println("#INFO [Encryption] [secondEncryption] Before");
+		printArrayToConsole(array, height, width);
 
 		QuickSort sort = new QuickSort();
-		sort.sortDuoMassive(array, height, width);
-		return null;
+		char[] result = sort.sortDuoMassive(array, height, width);
+		int index = 0;
+
+			while(index < width){
+			if (array[0][index] != result[index]){
+				for (int local = 0; local < width; local++){
+					if (result[index] == array[0][local]){
+						for (int localHeight = 0; localHeight < height; localHeight++){
+							char temp = array[localHeight][index];
+							array[localHeight][index] = array[localHeight][local];
+							array[localHeight][local] = temp;
+						}
+					}
+				}
+			}
+			index++;
+		}
+
+		System.out.println("#INFO [Encryption] [secondEncryption] After");
+		printArrayToConsole(array, height, width);
+		return convertArray(array, height, width, 1);
 	}
 
-	private String convertArray(char[][] result , int key, int count){
-
+	private String convertArray(char[][] result , int height, int width, int method){
 		StringBuilder builder = new StringBuilder();
-		System.out.println("#____RESULT:____#");
-		for(int indexLine = 0; indexLine < count; indexLine ++){
-			for (int indexColumn = 0; indexColumn < key; indexColumn++){
-				builder.append(result[indexColumn][indexLine]);
-				System.out.print(result[indexColumn][indexLine]);
+		System.out.println("#INFO [Encryption] [secondEncryption] #____RESULT:____#");
+
+		switch (method){
+			case 1:
+				for(int indexLine = 0; indexLine < width; indexLine ++){
+					for (int indexColumn = 0; indexColumn < height; indexColumn++){
+						builder.append(result[indexColumn][indexLine]);
+						System.out.print(result[indexColumn][indexLine]);
+					}
+				}
+			break;
+			case 2:
+				for (int indexWidth = 0; indexWidth < width; indexWidth++) {
+					for (int indexHeight = 0; indexHeight < height; indexHeight++){
+						builder.append(result[indexHeight][indexWidth]);
+						System.out.print(result[indexHeight][indexWidth]);
+					}
+				}
+				break;
+		}
+		return  builder.toString();
+	}
+
+	private void printArrayToConsole(char[][] array, int height, int width){
+		System.out.println();
+		for (int indexWidth = 0; indexWidth < width; indexWidth++) {
+			for (int indexHeight = 0; indexHeight < height; indexHeight++){
+				System.out.print(array[indexHeight][indexWidth]);
 			}
 		}
-		return builder.toString();
+		System.out.println();
 	}
-
 }

@@ -3,17 +3,19 @@ package sample.service;
 public class QuickSort {
 	private ABC abc = new ABC();
 
-	public void sortDuoMassive(char[][] source, int height , int width){
+	public char[] sortDuoMassive(char[][] source, int height , int width){
 		char[] key = new char[width];
 
 		for (int indexWidth = 0; indexWidth < width; indexWidth++) {
 			key[indexWidth] = source[0][indexWidth];
 		}
 		char[] result = sorting(key, 0, width-1); //char[] result =
-			System.out.println("done\n");
-			for(int index = 0; index < width; index++){
-				System.out.print(result[index]);
-			}
+		System.out.println("#INFO [QuickSort] [sortDuoMassive] done");
+		for(int index = 0; index < width; index++){
+			System.out.print(result[index]);
+		}
+		System.out.println();
+		return result;
 	}
 
 	private char[] sorting(char[] source, int left, int right){
