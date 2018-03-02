@@ -20,13 +20,13 @@ public class Controller {
 
 	@FXML
 	private void startAction(ActionEvent actionEvent) {
-		//System.out.println("Start bla-bla-bla");
 
 		String methodValue = method.getValue();
 		String cryptoKindValue = cryptoKind.getValue();
 		String sourceText = source.getText();
 		System.out.println("source: " + sourceText);
-		Encryption encryption = new Encryption();
+
+
 		CheckKey checkKey = new CheckKey();
 
 		switch (methodValue) {
@@ -35,12 +35,15 @@ public class Controller {
 				boolean isKeyCorrect = checkKey.checkFirst(key);
 				if (isKeyCorrect) {
 					int keyInt = Integer.parseInt(key); //TODO add error if key > 50% of count symbol by source text
-					if (keyInt > (sourceText.length()/2)){
+					if (keyInt < (sourceText.length()/2)){
 						if (cryptoKindValue.equals("Encoding")) {
+							Encryption encryption = new Encryption();
 							String resultTextFirstEncoding = encryption.firstEncryption(keyInt, sourceText);
 							result.setText(resultTextFirstEncoding);
 						} else {
-							System.out.println("coming soon");
+							Decryption decryption = new Decryption();
+							String resultTextFirstdecryption = decryption.decryptionFirst(keyInt, sourceText);
+							result.setText(resultTextFirstdecryption);
 						}
 					}else{
 						System.out.println("#INFO [Controller] [startAction] [ERROR] key is too long!");
@@ -49,18 +52,23 @@ public class Controller {
 					System.out.println("#INFO [Controller] [startAction] [ERROR] key is invalid!");
 				}
 				break;
-
 			case "2":
 				String keyString = this.key.getText();
 				boolean isKeySecondCorrect = checkKey.checkSecond(keyString);
 				if (isKeySecondCorrect) {
-					if (cryptoKindValue.equals("Encoding")) {
-						String resultTextSecondEncoding = encryption.secondEncryption(keyString, sourceText);
-						result.setText(resultTextSecondEncoding);
-					} else {
-						System.out.println("coming soon");
+					if (keyString.length() < (sourceText.length()/2)){
+						if (cryptoKindValue.equals("Encoding")) {
+							Encryption encryption = new Encryption();
+							String resultTextSecondEncoding = encryption.secondEncryption(keyString, sourceText);
+							result.setText(resultTextSecondEncoding);
+						} else {
+							Decryption decryption = new Decryption();
+							String resultTextSecondDecryption = decryption.decryptionSecond(keyString, sourceText);
+							result.setText(resultTextSecondDecryption);
+						}
+					}else{
+						System.out.println("#INFO [Controller] [startAction] [ERROR] key is too long!");
 					}
-
 				}else{
 					System.out.println("#INFO [Controller] [startAction] [ERROR] key is invalid!");
 				}

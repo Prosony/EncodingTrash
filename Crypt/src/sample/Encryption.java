@@ -1,7 +1,7 @@
 package sample;
 
-import sample.service.ABC;
 import sample.service.QuickSort;
+import sample.service.SortBySymbol;
 
 public class Encryption {
 
@@ -42,8 +42,6 @@ public class Encryption {
 
 	public String secondEncryption(String key, String source){
 
-		ABC abc = new ABC();
-
 		char[] keyArray = key.toCharArray();
 		int width = keyArray.length;
 
@@ -60,6 +58,7 @@ public class Encryption {
 		for (int index = 0; index < width; index++){
 			array[0][index] = keyArray[index];
 		}
+
 		int indexSource = 0;
 		for (int indexHeight = 1; indexHeight < height; indexHeight++){
 			for (int indexWidth = 0; indexWidth < width; indexWidth++){
@@ -71,32 +70,14 @@ public class Encryption {
 				}
 			}
 		}
-
-		System.out.println("#INFO [Encryption] [secondEncryption] Before");
-		printArrayToConsole(array, height, width);
-
 		QuickSort sort = new QuickSort();
 		char[] result = sort.sortDuoMassive(array, height, width);
-		int index = 0;
 
-			while(index < width){
-			if (array[0][index] != result[index]){
-				for (int local = 0; local < width; local++){
-					if (result[index] == array[0][local]){
-						for (int localHeight = 0; localHeight < height; localHeight++){
-							char temp = array[localHeight][index];
-							array[localHeight][index] = array[localHeight][local];
-							array[localHeight][local] = temp;
-						}
-					}
-				}
-			}
-			index++;
-		}
+		SortBySymbol bySymbol = new SortBySymbol();
+		bySymbol.sort(array, result, height, width);
 
 		System.out.println("#INFO [Encryption] [secondEncryption] After");
-		printArrayToConsole(array, height, width);
-		return convertArray(array, height, width, 1);
+		return convertArray(array, height, width, 2);
 	}
 
 	private String convertArray(char[][] result , int height, int width, int method){
@@ -113,8 +94,8 @@ public class Encryption {
 				}
 			break;
 			case 2:
-				for (int indexWidth = 0; indexWidth < width; indexWidth++) {
-					for (int indexHeight = 0; indexHeight < height; indexHeight++){
+				for (int indexHeight = 1; indexHeight < height; indexHeight++){
+					for (int indexWidth = 0; indexWidth < width; indexWidth++) {
 						builder.append(result[indexHeight][indexWidth]);
 						System.out.print(result[indexHeight][indexWidth]);
 					}
@@ -122,15 +103,5 @@ public class Encryption {
 				break;
 		}
 		return  builder.toString();
-	}
-
-	private void printArrayToConsole(char[][] array, int height, int width){
-		System.out.println();
-		for (int indexWidth = 0; indexWidth < width; indexWidth++) {
-			for (int indexHeight = 0; indexHeight < height; indexHeight++){
-				System.out.print(array[indexHeight][indexWidth]);
-			}
-		}
-		System.out.println();
 	}
 }

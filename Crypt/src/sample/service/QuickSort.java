@@ -3,6 +3,11 @@ package sample.service;
 public class QuickSort {
 	private ABC abc = new ABC();
 
+	public char[] sortMassive(String key){
+		char[] keyArray = key.toCharArray();
+		char[] result = sorting(keyArray, 0, keyArray.length-1);
+		return result;
+	}
 	public char[] sortDuoMassive(char[][] source, int height , int width){
 		char[] key = new char[width];
 
@@ -18,7 +23,7 @@ public class QuickSort {
 		return result;
 	}
 
-	private char[] sorting(char[] source, int left, int right){
+	public char[] sorting(char[] source, int left, int right){
 		if (left < right){
 			int index = partition(source, left, right);
 			sorting(source, left, index - 1);
