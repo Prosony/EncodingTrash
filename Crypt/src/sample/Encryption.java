@@ -73,6 +73,10 @@ public class Encryption {
 		System.out.println("#INFO [Encryption] [secondEncryption] After");
 		return service.convertArray(array, height, width, 2);
 	}
+	public String thirdEncription(int[] keyHeight, int[] keyWidth, String source){
+
+		return null;
+	}
 
 
 }

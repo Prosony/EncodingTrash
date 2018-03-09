@@ -31,10 +31,10 @@ public class Controller {
 
 		switch (methodValue) {
 			case "1":
-				String key = this.key.getText();
-				boolean isKeyCorrect = checkKey.checkFirst(key);
+				String keyFirst = this.key.getText();
+				boolean isKeyCorrect = checkKey.checkFirst(keyFirst);
 				if (isKeyCorrect) {
-					int keyInt = Integer.parseInt(key); //TODO add error if key > 50% of count symbol by source text
+					int keyInt = Integer.parseInt(keyFirst); //TODO add error if key > 50% of count symbol by source text
 					if (keyInt < (sourceText.length()/2)){
 						if (cryptoKindValue.equals("Encoding")) {
 							Encryption encryption = new Encryption();
@@ -53,17 +53,17 @@ public class Controller {
 				}
 				break;
 			case "2":
-				String keyString = this.key.getText();
-				boolean isKeySecondCorrect = checkKey.checkSecond(keyString);
+				String keySecond = this.key.getText();
+				boolean isKeySecondCorrect = checkKey.checkKey(keySecond);
 				if (isKeySecondCorrect) {
-					if (keyString.length() < (sourceText.length()/2)){
+					if (keySecond.length() < (sourceText.length()/2)){
 						if (cryptoKindValue.equals("Encoding")) {
 							Encryption encryption = new Encryption();
-							String resultTextSecondEncoding = encryption.secondEncryption(keyString, sourceText);
+							String resultTextSecondEncoding = encryption.secondEncryption(keySecond, sourceText);
 							result.setText(resultTextSecondEncoding);
 						} else {
 							Decryption decryption = new Decryption();
-							String resultTextSecondDecryption = decryption.decryptionSecond(keyString, sourceText);
+							String resultTextSecondDecryption = decryption.decryptionSecond(keySecond, sourceText);
 							result.setText(resultTextSecondDecryption);
 						}
 					}else{
@@ -74,7 +74,17 @@ public class Controller {
 				}
 				break;
 			case "3":
-				break;
+				String keyThird = this.key.getText();
+				boolean isKeyThirdCorrect = checkKey.checkKey(keyThird);
+				if (isKeyThirdCorrect) {
+					if (cryptoKindValue.equals("Encoding")) {
+
+						//TODO encryption
+					}else{
+						//TODO decryption
+					}
+				}
+					break;
 		}
 
 	}

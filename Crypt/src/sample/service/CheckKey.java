@@ -8,24 +8,79 @@ public class CheckKey {
         isKeyCorrect = judge(key.toCharArray(), number);
         return isKeyCorrect;
     }
-    public boolean checkSecond(String key){
 
+    public boolean checkKey(String key){
         char[] array = key.toCharArray();
         boolean isKeyCorrect = false;
         ABC abc = new ABC();
         String typeABC = abc.checkABC(array[0]);
 
+        if (typeABC.equalsIgnoreCase("NUM")){
+            int[]  abcMatrix = {0,0,0,0,0,0,0,0,0,0};
+            isKeyCorrect = judgeSymbol(key.toCharArray(), abc.getABC("NUM"), abcMatrix);
+        }
         if (typeABC.equalsIgnoreCase("ENG")) {
-            char[] abcENG = {'a','b','c','d','e','f','g','h','i','j','k','l','m','o','p','q','r','s','t','u','w','x','y','z'};
-            isKeyCorrect = judge(key.toCharArray(), abcENG);
+            int[]  abcMatrix = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+            isKeyCorrect = judgeSymbol(key.toCharArray(), abc.getABC("ENG"), abcMatrix);
         }
 
         if (typeABC.equalsIgnoreCase("RUS")){
-            char[] abcRUS = {'а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','ч','ц','ч','щ','ъ','ы','ь','э','ю','я'};
-            isKeyCorrect = judge(key.toCharArray(), abcRUS);
+            int[]  abcMatrix = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+            isKeyCorrect = judgeSymbol(key.toCharArray(), abc.getABC("RUS"), abcMatrix);
         }
+
+        if (typeABC.equalsIgnoreCase("THIRD")){
+            int[]  abcMatrix = {0,0,0,0,0,0,0,0,0,0};
+
+            if (key.length()%2 == 0){
+
+                String[] keys = new String[1];
+                char[] sourceKeys = key.toCharArray();
+                int middle = sourceKeys.length/2;
+                StringBuilder builderFirstKey = new StringBuilder();
+                StringBuilder builderSecondKey = new StringBuilder();
+
+                for (int index = 0; index < sourceKeys.length; index++){
+                    if (index > middle){
+                        builderSecondKey.append(sourceKeys[index]);
+                    }else{
+                        builderFirstKey.append(sourceKeys[index]);
+                    }
+
+                }
+                keys[0] = builderFirstKey.toString();
+                keys[1] = builderSecondKey.toString();
+                for (String cursor : keys){
+                    isKeyCorrect = judgeSymbol(cursor.toCharArray(), abc.getABC("NUM"), abcMatrix);
+                }
+//                isKeyCorrect = judgeSymbol(key.toCharArray(), abc.getABC("NUM"), abcMatrix);
+            }else {
+                isKeyCorrect = false;
+            }
+
+        }
+
         return isKeyCorrect;
     }
+
+    public boolean checkKey(String[] keys){
+        for (String key : keys){
+            checkThird(key);
+        }
+    }
+
+    public boolean checkThird(){
+        ABC abc = new ABC();
+        boolean isKeyCorrect = false;
+        int[]  abcMatrix = {0,0,0,0,0,0,0,0,0,0};
+
+        isKeyCorrect = judgeSymbol(key.toCharArray(), abc.getABC("RUS"), abcMatrix);
+        return isKeyCorrect;
+    }
+
+    /*************************************
+     *              Service
+     *************************************/
 
     private boolean judge(char[] array, char[] ABC){
         boolean isKeyCorrect = false;
@@ -33,6 +88,56 @@ public class CheckKey {
             for (char aRUS : ABC) {
                 if (anArray == aRUS) {
                     isKeyCorrect = true;
+                    break;
+                } else {
+                    isKeyCorrect = false;
+                }
+            }
+            if (!isKeyCorrect) {
+                break;
+            }
+        }
+        return isKeyCorrect;
+    }
+
+    private boolean judgeSymbol(char[] array, char[] ABC, int[] matric){
+        boolean isKeyCorrect = false;
+        for (int index = 0; index < array.length; index++) {
+            for (int cursor = 0; cursor < ABC.length; cursor++) {
+                if (array[index] == ABC[cursor]) {
+                    matric[cursor] = matric[cursor] + 1;
+                 if (matric[cursor] > 1){
+                     System.out.println("#INFO [CheckKey] [judgeSymbol] [ERROR] key have dublicate symbol!");
+                     isKeyCorrect = false;
+                 }else{
+                     isKeyCorrect = true;
+                 }
+
+                    break;
+                } else {
+                    isKeyCorrect = false;
+                }
+            }
+            if (!isKeyCorrect) {
+                break;
+            }
+        }
+        return isKeyCorrect;
+    }
+
+    private boolean judgeSymbolForThird(char[] array, char[] ABC, int[] matric){
+        boolean isKeyCorrect = false;
+        for (int index = 0; index < array.length; index++) {
+            for (int cursor = 0; cursor < ABC.length; cursor++) {
+                if (array[index] == ABC[cursor]) {
+                    matric[cursor] = matric[cursor] + 1;
+                    if (matric[cursor] > 2){
+                        System.out.println("#INFO [CheckKey] [judgeSymbol] [ERROR] key have dublicate symbol!");
+                        isKeyCorrect = false;
+                    }else{
+                        isKeyCorrect = true;
+                    }
+
                     break;
                 } else {
                     isKeyCorrect = false;

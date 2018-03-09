@@ -23,6 +23,7 @@ public class EncryptionService {
         return  height;
     }
 
+
     public String convertArray(char[][] result , int height, int width, int method){
         StringBuilder builder = new StringBuilder();
         System.out.println("#INFO [Encryption] [secondEncryption] #____RESULT:____#");
