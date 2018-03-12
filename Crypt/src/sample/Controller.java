@@ -3,7 +3,7 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import sample.service.CheckKey;
+import sample.service.key.CheckKey;
 
 public class Controller {
 
@@ -54,6 +54,7 @@ public class Controller {
 				break;
 			case "2":
 				String keySecond = this.key.getText();
+
 				boolean isKeySecondCorrect = checkKey.checkKey(keySecond);
 				if (isKeySecondCorrect) {
 					if (keySecond.length() < (sourceText.length()/2)){
@@ -75,10 +76,10 @@ public class Controller {
 				break;
 			case "3":
 				String keyThird = this.key.getText();
-				boolean isKeyThirdCorrect = checkKey.checkKey(keyThird);
+				boolean isKeyThirdCorrect = checkKey.checkDoubleKey(keyThird);
 				if (isKeyThirdCorrect) {
 					if (cryptoKindValue.equals("Encoding")) {
-
+						System.out.println("fuck damn!");
 						//TODO encryption
 					}else{
 						//TODO decryption

@@ -57,6 +57,7 @@ public class ABC {
 				return "NUM";
 			}
 		}
+
 		return null;
 	}
 	public char[] getABC(String type){

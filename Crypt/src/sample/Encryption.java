@@ -9,7 +9,7 @@ public class Encryption {
 	public String firstEncryption(int key, String source){
 
 		EncryptionService service = new EncryptionService();
-		int height = service.getHeightSecond(key, source);
+		int height = service.getHeightFirst(key, source);
 
 		System.out.println("source.length()" + source.length());
 		System.out.println("key:" + key);
@@ -73,7 +73,7 @@ public class Encryption {
 		System.out.println("#INFO [Encryption] [secondEncryption] After");
 		return service.convertArray(array, height, width, 2);
 	}
-	public String thirdEncription(int[] keyHeight, int[] keyWidth, String source){
+	public String thirdEncription(int[] height, int[] width, String source){
 
 		return null;
 	}
