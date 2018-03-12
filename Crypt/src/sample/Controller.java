@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import sample.service.key.CheckKey;
+import sample.service.key.KeyGetting;
 
 public class Controller {
 
@@ -80,13 +81,32 @@ public class Controller {
 				if (isKeyThirdCorrect) {
 					if (cryptoKindValue.equals("Encoding")) {
 						System.out.println("fuck damn!");
-						//TODO encryption
+						KeyGetting getting = new KeyGetting();
+						String[] keys = getting.getDoubleKeyFromString(keyThird);
+						System.out.println("key one: "+keys[0]);
+						System.out.println("key two: "+keys[1]);
+						Encryption encryption = new Encryption();
+						encryption.thirdEncription(keys, sourceText);
 					}else{
 						//TODO decryption
 					}
 				}
 					break;
+
 		}
 
 	}
 }
+/**
+ * int[][] array = new int[5][5];
+ int i = 0;
+ for (int height = 0; height < 5; height++) {
+ i = height;
+ for (int width = 0; width < 5; width++) {
+ array[height][width] = i;
+ i++;
+ System.out.print(array[height][width]);
+ }
+ System.out.println();
+ }
+ */

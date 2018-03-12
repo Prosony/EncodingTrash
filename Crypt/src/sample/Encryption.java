@@ -73,10 +73,59 @@ public class Encryption {
 		System.out.println("#INFO [Encryption] [secondEncryption] After");
 		return service.convertArray(array, height, width, 2);
 	}
-	public String thirdEncription(int[] height, int[] width, String source){
+	public String thirdEncription(String[] keys, String source){
+		char[] keyHeight = keys[0].toCharArray();
+		char[] keyWidth = keys[1].toCharArray();
+		int height = keyHeight.length + 1;
+		int width = keyWidth.length + 1;
+		char[] text = source.toCharArray();
+		if (source.length() > 0){
+			int count = source.length()/(keyHeight.length + keyWidth.length);
+			if (count == 0){count = 1;}
+			int countKeyOne = 0;
+			int countKeyTwo = 0;
+			int countText = 0;
+			for (int index = 0; index < count; index++){
+				char[][] array = new char[height][width];
+				for (int cursorH = 0; cursorH< height; cursorH++){
+					for (int cursorW = 0; cursorW < width; cursorW++){
+
+							if (cursorH == 0 && cursorW == 0) array[cursorH][cursorW] = '0';
+							if (cursorH == 0 && cursorW !=0) {
+								array[cursorH][cursorW] = keyHeight[countKeyOne];
+								countKeyOne++;
+							}
+							if (cursorH != 0 && cursorW ==0){
+								array[cursorH][cursorW] = keyWidth[countKeyTwo];
+								countKeyTwo++;
+							}
+
+						if (cursorH != 0 && cursorW != 0){
+							if (countText < text.length){
+								array[cursorH][cursorW] = text[countText];
+								countText++;
+							}else{
+								array[cursorH][cursorW] = ' ';
+							}
+						}
+					}
+				}
+				countKeyOne = 0;
+				countKeyTwo = 0;
+				System.out.println("count: "+index);
+				System.out.println("___________________________");
+				for (int cursorH = 0; cursorH< height; cursorH++) {
+					for (int cursorW = 0; cursorW < width; cursorW++) {
+						System.out.print(array[cursorH][cursorW]);
+					}
+					System.out.println();
+				}
+				System.out.println("___________________________");
+				//TODO send to sort
+			}
+		}
 
 		return null;
 	}
-
 
 }
