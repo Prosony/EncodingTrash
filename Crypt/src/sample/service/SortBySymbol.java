@@ -1,7 +1,8 @@
 package sample.service;
 
 public class SortBySymbol {
-    public char[][] sort(char[][] array, char[] key, int height, int width){
+
+    public char[][] sortSecond(char[][] array, char[] key, int height, int width){
         int index = 0;
         while(index < width){
             if (array[0][index] != key[index]){
@@ -18,5 +19,8 @@ public class SortBySymbol {
             index++;
         }
     return array;
+    }
+    public char[][] sortThird(){
+        return null;
     }
 }

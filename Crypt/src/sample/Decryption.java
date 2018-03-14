@@ -30,7 +30,7 @@ public class Decryption {
             }
         }
         for (int i_key = 0; i_key < key; i_key++) {
-            for (int i_count=0; i_count < count; i_count++) {
+            for (int i_count=0; i_ count < count; i_count++) {
                 builder.append(array[i_key][i_count]);
             }
         }
@@ -68,7 +68,7 @@ public class Decryption {
         }
 
         SortBySymbol bySymbol = new SortBySymbol();
-        char[][] result =  bySymbol.sort(array, key.toCharArray(), height, width);
+        char[][] result =  bySymbol.sortSecond(array, key.toCharArray(), height, width);
 
         StringBuilder builder = new StringBuilder();
         for (int indexHeight = 1; indexHeight < height; indexHeight++){

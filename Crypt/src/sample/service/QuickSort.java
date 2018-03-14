@@ -5,15 +5,9 @@ public class QuickSort {
 
 	public char[] sortMassive(String key){
 		char[] keyArray = key.toCharArray();
-		char[] result = sorting(keyArray, 0, keyArray.length-1);
-		return result;
+		return sorting(keyArray, 0, keyArray.length-1);
 	}
-	public char[] sortDuoMassive(char[][] source, int height , int width){
-		char[] key = new char[width];
-
-		for (int indexWidth = 0; indexWidth < width; indexWidth++) {
-			key[indexWidth] = source[0][indexWidth];
-		}
+	public char[] sortDuoMassive(char[][] source, char[] key, int height , int width){
 		char[] result = sorting(key, 0, width-1); //char[] result =
 		System.out.println("#INFO [QuickSort] [sortDuoMassive] done");
 		for(int index = 0; index < width; index++){

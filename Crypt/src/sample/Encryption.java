@@ -65,14 +65,15 @@ public class Encryption {
 			}
 		}
 		QuickSort sort = new QuickSort();
-		char[] result = sort.sortDuoMassive(array, height, width);
+		char[] result = sort.sortDuoMassive(array, keyArray,height, width);
 
 		SortBySymbol bySymbol = new SortBySymbol();
-		bySymbol.sort(array, result, height, width);
+		bySymbol.sortSecond(array, result, height, width);
 
 		System.out.println("#INFO [Encryption] [secondEncryption] After");
 		return service.convertArray(array, height, width, 2);
 	}
+
 	public String thirdEncription(String[] keys, String source){
 		char[] keyHeight = keys[0].toCharArray();
 		char[] keyWidth = keys[1].toCharArray();
@@ -105,7 +106,7 @@ public class Encryption {
 								array[cursorH][cursorW] = text[countText];
 								countText++;
 							}else{
-								array[cursorH][cursorW] = ' ';
+								array[cursorH][cursorW] = '*';
 							}
 						}
 					}
@@ -124,7 +125,6 @@ public class Encryption {
 				//TODO send to sort
 			}
 		}
-
 		return null;
 	}
 
