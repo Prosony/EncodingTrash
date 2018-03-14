@@ -1,8 +1,10 @@
 package sample;
 
 import sample.service.EncryptionService;
-import sample.service.QuickSort;
-import sample.service.SortBySymbol;
+import sample.service.sorting.QuickSort;
+import sample.service.sorting.SortBySymbol;
+
+import java.util.Arrays;
 
 public class Encryption {
 
@@ -74,7 +76,7 @@ public class Encryption {
 		return service.convertArray(array, height, width, 2);
 	}
 
-	public String thirdEncription(String[] keys, String source){
+	public String thirdEncryption(String[] keys, String source){
 		char[] keyHeight = keys[0].toCharArray();
 		char[] keyWidth = keys[1].toCharArray();
 		int height = keyHeight.length + 1;
@@ -83,11 +85,12 @@ public class Encryption {
 		if (source.length() > 0){
 			int count = source.length()/(keyHeight.length + keyWidth.length);
 			if (count == 0){count = 1;}
-			int countKeyOne = 0;
-			int countKeyTwo = 0;
+
 			int countText = 0;
 			for (int index = 0; index < count; index++){
 				char[][] array = new char[height][width];
+				int countKeyOne = 0;
+				int countKeyTwo = 0;
 				for (int cursorH = 0; cursorH< height; cursorH++){
 					for (int cursorW = 0; cursorW < width; cursorW++){
 
@@ -111,8 +114,6 @@ public class Encryption {
 						}
 					}
 				}
-				countKeyOne = 0;
-				countKeyTwo = 0;
 				System.out.println("count: "+index);
 				System.out.println("___________________________");
 				for (int cursorH = 0; cursorH< height; cursorH++) {
@@ -123,7 +124,16 @@ public class Encryption {
 				}
 				System.out.println("___________________________");
 				//TODO send to sort
+				QuickSort sort = new QuickSort();
+				char[] doneKeyHeight = sort.sortMassive(keys[0]);
+				char[] doneKeyWidth = sort.sortMassive(keys[1]);
+				SortBySymbol bySymbol = new SortBySymbol();
+				bySymbol.sortThird(doneKeyHeight, doneKeyWidth, array);
+				System.out.println("#INFO [Encryption] [thirdEncryption] doneKeyHeight: "+ Arrays.toString(doneKeyHeight));
+				System.out.println("#INFO [Encryption] [thirdEncryption] doneKeyWidth: "+ Arrays.toString(doneKeyWidth));
 			}
+		}else{
+			System.out.println("#INFO [Encryption] [thirdEncryption] source is null");
 		}
 		return null;
 	}

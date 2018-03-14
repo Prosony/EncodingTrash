@@ -1,4 +1,6 @@
-package sample.service;
+package sample.service.sorting;
+
+import sample.service.ABC;
 
 public class QuickSort {
 	private ABC abc = new ABC();

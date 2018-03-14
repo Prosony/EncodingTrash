@@ -1,7 +1,7 @@
 package sample;
 
-import sample.service.QuickSort;
-import sample.service.SortBySymbol;
+import sample.service.sorting.QuickSort;
+import sample.service.sorting.SortBySymbol;
 
 public class Decryption {
 
@@ -30,7 +30,7 @@ public class Decryption {
             }
         }
         for (int i_key = 0; i_key < key; i_key++) {
-            for (int i_count=0; i_ count < count; i_count++) {
+            for (int i_count=0; i_count < count; i_count++) {
                 builder.append(array[i_key][i_count]);
             }
         }

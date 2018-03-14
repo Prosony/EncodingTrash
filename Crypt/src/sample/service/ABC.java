@@ -34,7 +34,17 @@ public class ABC {
 						return indexEquals;
 					}
 					break;
-
+				case "num":
+					for (int index = 0; index < abcNUM.length; index++){
+						if (symbol == abcNUM[index]){
+							indexEquals = index;
+							break;
+						}
+					}
+					if (indexEquals != -1){
+						return indexEquals;
+					}
+					break;
 			}
 		}else {
 			System.out.println("#INFO [ABC] [getNumberABC] [ERROR] abc not found!");
@@ -54,7 +64,7 @@ public class ABC {
 		}
 		for (char number : abcNUM){
 			if (symbol == number){
-				return "NUM";
+				return "num";
 			}
 		}
 

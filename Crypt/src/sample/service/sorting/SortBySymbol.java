@@ -1,4 +1,4 @@
-package sample.service;
+package sample.service.sorting;
 
 public class SortBySymbol {
 
@@ -20,7 +20,9 @@ public class SortBySymbol {
         }
     return array;
     }
-    public char[][] sortThird(){
+    public char[][] sortThird(char[] keyHeight, char[] keyWidth, char[][] source){
+
+
         return null;
     }
 }
