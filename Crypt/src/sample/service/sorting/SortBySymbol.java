@@ -21,7 +21,32 @@ public class SortBySymbol {
     return array;
     }
     public char[][] sortThird(char[] keyHeight, char[] keyWidth, char[][] source){
+        int heightSize = keyHeight.length;
+        int widthSize = keyWidth.length;
+        int index = 0;
 
+        while(index < widthSize){
+            if (keyHeight[index] !=source[0][index] ){
+                for (int local = 0; local < widthSize; local++){
+                    if (keyHeight[index] == source[0][local]){
+                        char temp = source[0][local];
+                        source[0][index] = source[0][local];
+                        source[0][local] = temp;
+                        index++;
+                        local = 0;
+
+                        //TODO other elements
+                    }
+                }
+            }
+            index++;
+        }
+
+        for(int width = 0; width< widthSize; width++){
+            if (source[0][width] == keyWidth[width]){
+
+            }
+        }
 
         return null;
     }

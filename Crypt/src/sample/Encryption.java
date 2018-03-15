@@ -129,6 +129,7 @@ public class Encryption {
 				char[] doneKeyWidth = sort.sortMassive(keys[1]);
 				SortBySymbol bySymbol = new SortBySymbol();
 				bySymbol.sortThird(doneKeyHeight, doneKeyWidth, array);
+
 				System.out.println("#INFO [Encryption] [thirdEncryption] doneKeyHeight: "+ Arrays.toString(doneKeyHeight));
 				System.out.println("#INFO [Encryption] [thirdEncryption] doneKeyWidth: "+ Arrays.toString(doneKeyWidth));
 			}
