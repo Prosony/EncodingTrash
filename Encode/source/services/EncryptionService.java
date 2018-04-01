@@ -1,4 +1,4 @@
-package sample.service;
+package services;
 
 public class EncryptionService {
 
